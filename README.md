@@ -1,31 +1,23 @@
+<!-- ═══════════════════════════════════ HERO TITLE ═══════════════════════════════════ -->
+
+<h1 align="center">🩺 Swasthya Margadarshika</h1>
+
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Plus+Jakarta+Sans&weight=800&size=36&pause=1000&color=0D9488&center=true&vCenter=true&multiline=true&repeat=false&width=700&height=90&lines=🩺+Swasthya+Margadarshika" alt="Project Title" />
+  <strong>स्वास्थ्य मार्गदर्शिका — AI-Powered Clinical Decision Support Platform</strong>
 </p>
 
 <p align="center">
-  <a href="#-features"><img src="https://img.shields.io/badge/Features-14+-0d9488?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyYTEwIDEwIDAgMSAwIDAgMjAgMTAgMTAgMCAwIDAgMC0yMHptMSAxNGgtMnYtMmgydjJ6bTAtNGgtMlY3aDJ2NXoiLz48L3N2Zz4=" alt="Features" /></a>
+  <a href="#-features"><img src="https://img.shields.io/badge/Features-14+-0d9488?style=for-the-badge" alt="Features" /></a>
   <a href="#-quickstart"><img src="https://img.shields.io/badge/Quick_Start-Guide-3b82f6?style=for-the-badge&logo=rocket&logoColor=white" alt="Quick Start" /></a>
   <a href="#-api-reference"><img src="https://img.shields.io/badge/API-Documented-8b5cf6?style=for-the-badge&logo=swagger&logoColor=white" alt="API" /></a>
   <a href="#-deployment"><img src="https://img.shields.io/badge/Deploy-Render-46e3b7?style=for-the-badge&logo=render&logoColor=white" alt="Deploy" /></a>
 </p>
 
 <p align="center">
-  <strong>AI-Powered Clinical Decision Support Platform</strong><br/>
   <sub>Machine learning symptom analysis · 132 symptoms · 41 conditions · Evidence-based guidance</sub>
 </p>
 
 ---
-
-<br/>
-
-<!-- ═══════════════════════════════════ HERO SVG BANNER ═══════════════════════════════════ -->
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:0d9488,50:3b82f6,100:8b5cf6&height=200&section=header&text=&fontSize=0&animation=fadeIn" />
-    <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d9488,50:3b82f6,100:8b5cf6&height=200&section=header&text=&fontSize=0&animation=fadeIn" width="100%" alt="header" />
-  </picture>
-</p>
 
 <!-- ═══════════════════════════════════ TECH STACK SVG BADGES ═══════════════════════════════════ -->
 
@@ -42,8 +34,6 @@
   <img src="https://img.shields.io/badge/Pydantic-v2-E92063?style=flat-square&logo=pydantic&logoColor=white" alt="Pydantic" />
   <img src="https://img.shields.io/badge/Render-Deployment-46e3b7?style=flat-square&logo=render&logoColor=white" alt="Render" />
 </p>
-
-<br/>
 
 ---
 
@@ -652,8 +642,5 @@ The project includes a pre-configured [`render.yaml`](render.yaml) blueprint for
 </p>
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:0d9488,50:3b82f6,100:8b5cf6&height=120&section=footer&animation=fadeIn" />
-    <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d9488,50:3b82f6,100:8b5cf6&height=120&section=footer&animation=fadeIn" width="100%" alt="footer" />
-  </picture>
+  <img src="https://img.shields.io/badge/🩺_Swasthya_Margadarshika-Your_Health_Guide-0d9488?style=for-the-badge" alt="Swasthya Margadarshika" />
 </p>
