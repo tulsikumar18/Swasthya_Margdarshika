@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+
+{% block title %}Symptom Checker | Swasthya Margadarshika{% endblock %}
+
+{% block content %}
+<!-- Neumorphic Hero Banner -->
+<section class="neu-hero-section text-center py-5">
+    <div class="container">
+        <div class="neu-hero-container mx-auto">
+            <div class="neu-hero-badge mb-3">
+                <i class="fas fa-heart-pulse text-danger me-2"></i> Intelligent Clinical Guidance System
+            </div>
+            <h1 class="neu-hero-title mb-3">
+                Swasthya Margadarshika
+            </h1>
+            <p class="neu-hero-sub mx-auto mb-4">
+                AI and machine learning powered symptom analysis cross-referencing 132 medical symptoms across 41 recognized conditions with clinically referenced medications, precautions, and dietary guidance.
+            </p>
+            <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-4">
+                <a href="#checker-section" class="neu-btn neu-btn-action px-5 py-3 fs-6">
+                    <i class="fas fa-stethoscope me-2"></i> Start Health Check
+                </a>
+                <a href="/about" class="neu-btn px-4 py-3 fs-6">
+                    <i class="fas fa-circle-info text-primary me-2"></i> How It Works
+                </a>
+            </div>
+            <!-- Trust & Metric Badges -->
+            <div class="d-flex justify-content-center align-items-center gap-2 gap-sm-3 flex-wrap">
+                <span class="neu-badge-pill">
+                    <i class="fas fa-circle-check text-success me-1"></i> 132 Symptoms
+                </span>
+                <span class="neu-badge-pill">
+                    <i class="fas fa-circle-check text-success me-1"></i> 41 Conditions
+                </span>
+                <span class="neu-badge-pill">
+                    <i class="fas fa-shield-halved text-primary me-1"></i> Evidence-Based Care
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- How It Works - 3 Neumorphic Cards -->
+<section class="py-3">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="neu-step-card">
+                    <div class="neu-circle-recessed text-primary"><i class="fas fa-dna"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-0">1. Select Symptoms</h6>
+                        <small class="text-muted">Type, speak, or describe how you feel</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="neu-step-card">
+                    <div class="neu-circle-recessed text-danger"><i class="fas fa-chart-pie"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-0">2. ML Analysis</h6>
+                        <small class="text-muted">Trained SVC model evaluates health markers</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="neu-step-card">
+                    <div class="neu-circle-recessed text-success"><i class="fas fa-hand-holding-medical"></i></div>
+                    <div>
+                        <h6 class="fw-bold mb-0">3. Clinical Guidance</h6>
+                        <small class="text-muted">Medications, precautions, diet & workouts</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Interactive Neumorphic Symptom Checker Section -->
+<section id="checker-section" class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9 col-lg-10">
+                
+                <!-- Client Alert Message Container -->
+                <div id="clientAlertContainer" style="display: none;"></div>
+
+                {% if error_message %}
+                <div class="neu-card p-3 mb-4 text-danger d-flex align-items-center gap-3" role="alert">
+                    <i class="fas fa-circle-exclamation fs-4"></i>
+                    <div>{{ error_message }}</div>
+                </div>
+                {% endif %}
+
+                <!-- Main Neumorphic Symptom Checker Card -->
+                <div class="checker-card">
+                    <div class="checker-header d-flex flex-wrap align-items-center justify-content-between gap-3">
+                        <div>
+                            <h3 class="fw-bold mb-1"><i class="fas fa-stethoscope text-primary me-2"></i>Symptom Checker</h3>
+                            <p class="text-secondary small mb-0">Select or describe your symptoms to receive health recommendations.</p>
+                        </div>
+                        <button type="button" class="neu-btn text-danger btn-sm" id="clearAllSymptomsBtn">
+                            <i class="fas fa-trash-can me-1"></i> Clear All
+                        </button>
+                    </div>
+
+                    <div class="checker-body">
+                        <!-- Mode Selector Tabs (Neumorphic Segmented Control) -->
+                        <div class="mb-4">
+                            <div class="neu-segmented-control" role="group">
+                                <button type="button" class="neu-segment-btn active" id="modeQuickSelectBtn">
+                                    <i class="fas fa-magnifying-glass me-1"></i> Search & Select
+                                </button>
+                                <button type="button" class="neu-segment-btn" id="modeConversationalBtn">
+                                    <i class="fas fa-comment-medical me-1"></i> Describe Symptoms
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Symptom Search Form -->
+                        <form id="symptomCheckerForm" action="/predict" method="post">
+                            <input type="hidden" name="symptoms" id="hiddenSymptomsInput" value="{{ submitted_symptoms or '' }}">
+
+                            <!-- Mode 1: Search & Select Input -->
+                            <div id="quickSearchInputContainer" class="form-group mb-4">
+                                <div class="symptom-input-wrapper">
+                                    <i class="fas fa-magnifying-glass search-icon-inside"></i>
+                                    <input type="text"
+                                           class="search-input-field"
+                                           id="symptomSearchInput"
+                                           placeholder="Type a symptom or paste a comma-separated list..."
+                                           autocomplete="off">
+                                    <button type="button" class="neu-btn-circle position-absolute end-0 top-50 translate-middle-y me-2" id="micButton" title="Speak symptoms">
+                                        <i class="fas fa-microphone"></i>
+                                    </button>
+                                    
+                                    <!-- Autocomplete Dropdown List -->
+                                    <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                                </div>
+                                <div class="small text-muted mt-2 ps-3">
+                                    <i class="fas fa-circle-info me-1 text-primary"></i> Type symptoms, paste comma-separated lists, or use the mic.
+                                </div>
+                            </div>
+
+                            <!-- Mode 2: Conversational (hidden by default) -->
+                            <div id="conversationalInputContainer" class="form-group mb-4" style="display: none;">
+                                <textarea class="neu-textarea"
+                                          id="conversationalTextInput"
+                                          rows="3"
+                                          placeholder="e.g., 'I am feeling stomach ache, headache, and vomiting since morning'"></textarea>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button type="button" class="neu-btn btn-sm" id="micConversationalBtn">
+                                        <i class="fas fa-microphone me-1"></i> Speak Symptoms
+                                    </button>
+                                    <button type="button" class="neu-btn neu-btn-primary btn-sm fw-bold" id="extractSymptomsBtn">
+                                        <i class="fas fa-wand-magic-sparkles me-1"></i> Extract Symptoms
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Confirmation Card -->
+                            <div id="symptomConfirmationCard" class="neu-card p-4 mb-4" style="display: none;">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="fas fa-notes-medical text-primary fs-5"></i>
+                                        <h6 class="fw-bold mb-0 text-primary">Confirm Detected Symptoms</h6>
+                                    </div>
+                                    <span class="neu-btn text-primary py-1 px-3" style="font-size: 0.8rem;" id="detectedCountBadge">0 detected</span>
+                                </div>
+                                <p class="small text-secondary mb-3" id="confirmationPromptText">
+                                    Review the extracted symptoms and confirm to proceed:
+                                </p>
+                                <div class="d-flex flex-wrap gap-2 mb-3" id="confirmationChipsList"></div>
+                                <div class="d-flex gap-2">
+                                    <button type="button" id="confirmAndAnalyzeBtn" class="neu-btn neu-btn-action btn-sm px-4">
+                                        <i class="fas fa-check me-1"></i> Confirm & Analyze
+                                    </button>
+                                    <button type="button" id="cancelConfirmationBtn" class="neu-btn btn-sm px-3">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Selected Symptoms Display -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="form-label fw-semibold text-secondary small text-uppercase mb-0">
+                                        Selected Symptoms:
+                                    </label>
+                                    <span class="neu-btn py-1 px-3" style="font-size: 0.78rem;" id="selectedCountBadge">0 selected</span>
+                                </div>
+                                <div class="selected-chips-container" id="selectedChipsContainer">
+                                    <div class="text-muted small py-2 px-1 fst-italic" id="emptyChipsNotice">
+                                        <i class="fas fa-hand-pointer me-1"></i> No symptoms selected yet. Pick common ones below or type above.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Suggestion Pills -->
+                            <div class="mb-4">
+                                <span class="d-block text-secondary small fw-semibold mb-2">Quick Common Symptoms:</span>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span class="suggestion-pill" data-symptom="itching"><i class="fas fa-plus me-1 text-primary"></i> Itching</span>
+                                    <span class="suggestion-pill" data-symptom="skin_rash"><i class="fas fa-plus me-1 text-primary"></i> Skin Rash</span>
+                                    <span class="suggestion-pill" data-symptom="fatigue"><i class="fas fa-plus me-1 text-primary"></i> Fatigue</span>
+                                    <span class="suggestion-pill" data-symptom="high_fever"><i class="fas fa-plus me-1 text-primary"></i> High Fever</span>
+                                    <span class="suggestion-pill" data-symptom="cough"><i class="fas fa-plus me-1 text-primary"></i> Cough</span>
+                                    <span class="suggestion-pill" data-symptom="breathlessness"><i class="fas fa-plus me-1 text-primary"></i> Breathlessness</span>
+                                    <span class="suggestion-pill" data-symptom="headache"><i class="fas fa-plus me-1 text-primary"></i> Headache</span>
+                                    <span class="suggestion-pill" data-symptom="nausea"><i class="fas fa-plus me-1 text-primary"></i> Nausea</span>
+                                    <span class="suggestion-pill" data-symptom="vomiting"><i class="fas fa-plus me-1 text-primary"></i> Vomiting</span>
+                                    <span class="suggestion-pill" data-symptom="chest_pain"><i class="fas fa-plus me-1 text-primary"></i> Chest Pain</span>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="mt-4">
+                                <button type="submit" id="predictSubmitBtn" class="neu-btn neu-btn-action w-100 py-3 fs-5 shadow">
+                                    <i class="fas fa-stethoscope me-2"></i> Analyze Symptoms
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Loading Indicator -->
+                        <div id="loadingIndicator" class="text-center py-5" style="display: none;">
+                            <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;" role="status">
+                                <span class="visually-hidden">Analyzing...</span>
+                            </div>
+                            <h5 class="fw-bold mt-3 mb-1 text-primary">Analyzing symptoms...</h5>
+                            <p class="text-muted small mb-0">Cross-referencing with ML model and medical databases.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Async Results Area -->
+                <div id="predictionResultsArea" style="display: none;"></div>
+
+                <!-- Server-Side Fallback Results -->
+                {% if result %}
+                <div class="result-box mt-5">
+                    <div class="result-header d-flex flex-wrap align-items-center justify-content-between gap-3">
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <span class="mode-badge {% if result.mode == 'ml_prediction' %}mode-ml{% elif result.mode == 'ai_assisted' %}mode-ai{% else %}mode-fallback{% endif %}">
+                                    {{ result.mode|upper }}
+                                </span>
+                            </div>
+                            <h2 class="fw-bold mb-1">{{ result.predicted_disease or 'Condition Evaluation' }}</h2>
+                            <p class="text-muted small mb-0">{{ result.message }}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 p-md-5">
+                        <div class="neu-card p-4 mb-4">
+                            <h5 class="fw-bold mb-2 text-primary"><i class="fas fa-book-medical me-2"></i> Description</h5>
+                            <p class="mb-0 text-secondary">{{ result.description }}</p>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <div class="category-card">
+                                    <div class="category-icon text-primary"><i class="fas fa-pills"></i></div>
+                                    <h6 class="fw-bold mb-2">Medicines (Top 5)</h6>
+                                    <ul class="list-group list-group-flush">
+                                        {% for med in result.medications %}
+                                        <li class="list-group-item d-flex align-items-start gap-2 border-0 px-0 py-1">
+                                            <i class="fas fa-capsules mt-1 text-primary"></i> <span class="small">{{ med }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="category-card">
+                                    <div class="category-icon text-warning"><i class="fas fa-shield-virus"></i></div>
+                                    <h6 class="fw-bold mb-2">Precautions</h6>
+                                    <ul class="list-group list-group-flush">
+                                        {% for p in result.precautions %}
+                                        <li class="list-group-item d-flex align-items-start gap-2 border-0 px-0 py-1">
+                                            <i class="fas fa-shield-halved mt-1 text-warning"></i> <span class="small">{{ p }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="category-card">
+                                    <div class="category-icon text-success"><i class="fas fa-carrot"></i></div>
+                                    <h6 class="fw-bold mb-2">Diet</h6>
+                                    <ul class="list-group list-group-flush">
+                                        {% for d in result.diet_recommendations %}
+                                        <li class="list-group-item d-flex align-items-start gap-2 border-0 px-0 py-1">
+                                            <i class="fas fa-leaf mt-1 text-success"></i> <span class="small">{{ d }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="category-card">
+                                    <div class="category-icon text-purple"><i class="fas fa-person-running"></i></div>
+                                    <h6 class="fw-bold mb-2">Workout & Activity</h6>
+                                    <ul class="list-group list-group-flush">
+                                        {% for w in result.workout_recommendations %}
+                                        <li class="list-group-item d-flex align-items-start gap-2 border-0 px-0 py-1">
+                                            <i class="fas fa-heart-pulse mt-1 text-purple"></i> <span class="small">{{ w }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="neu-card p-3 d-flex align-items-start gap-3 text-secondary small" role="alert">
+                            <i class="fas fa-triangle-exclamation text-warning fs-5 mt-1"></i>
+                            <div><strong>Medical Notice:</strong> {{ result.disclaimer }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

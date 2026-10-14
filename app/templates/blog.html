@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Health & ML Blog | Personalized Medical Recommendation System{% endblock %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container py-4">
+        <div class="text-center mb-5 max-w-700 mx-auto">
+            <span class="neu-btn text-primary py-1 px-3 mb-3" style="font-size: 0.85rem;">Articles & Insights</span>
+            <h1 class="fw-bold mb-3">Health & Clinical Machine Learning</h1>
+            <p class="text-secondary lead">
+                Explore articles and updates on healthcare technology, disease classification, preventative nutrition, and responsible artificial intelligence.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="neu-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <span class="neu-btn text-info py-1 px-3 mb-3" style="font-size: 0.78rem;">Machine Learning</span>
+                        <h5 class="fw-bold mb-2">How Support Vector Machines Classify Disease Patterns</h5>
+                        <p class="text-secondary small mb-3">
+                            An in-depth look into hyperplanes, binary feature representation, and multi-class classification for 132 physiological symptoms.
+                        </p>
+                    </div>
+                    <a href="#" class="neu-btn btn-sm text-primary w-fit">Read Article <i class="fas fa-arrow-right fa-xs"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="neu-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <span class="neu-btn text-success py-1 px-3 mb-3" style="font-size: 0.78rem;">Preventative Wellness</span>
+                        <h5 class="fw-bold mb-2">Nutrition & Physical Activity in Chronic Disease Management</h5>
+                        <p class="text-secondary small mb-3">
+                            Why early dietary intervention and tailored exercise routines significantly mitigate long-term cardiovascular and metabolic risks.
+                        </p>
+                    </div>
+                    <a href="#" class="neu-btn btn-sm text-success w-fit">Read Article <i class="fas fa-arrow-right fa-xs"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="neu-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <span class="neu-btn text-warning py-1 px-3 mb-3" style="font-size: 0.78rem;">Clinical Safety</span>
+                        <h5 class="fw-bold mb-2">The Imperative of AI Fallback & Human Oversight</h5>
+                        <p class="text-secondary small mb-3">
+                            Why medical AI systems must never fabricate diagnoses or guess unverified symptoms when inputs fall outside training domains.
+                        </p>
+                    </div>
+                    <a href="#" class="neu-btn btn-sm text-warning w-fit">Read Article <i class="fas fa-arrow-right fa-xs"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment Variables and Secrets
+.env
+*.local.env
+
+# Cache directories
+.pytest_cache/
+api_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# IDE Files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node artifacts (legacy)
+node_modules/
+
+# Backups & Logs
+models/*backup*
+*.log
+scratch/

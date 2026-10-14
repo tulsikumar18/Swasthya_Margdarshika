@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}About | Swasthya Margadarshika{% endblock %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container py-4">
+        <!-- Hero Intro Card -->
+        <div class="neu-card p-4 p-md-5 mb-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="neu-btn text-primary py-1 px-3 mb-3" style="font-size: 0.85rem;">About the Platform</span>
+                    <h1 class="fw-bold mb-3">Empowering Proactive Healthcare Decisions</h1>
+                    <p class="text-secondary lead">
+                        The Swasthya Margadarshika merges machine learning classification with curated clinical datasets to bridge the gap between initial symptom recognition and timely professional medical intervention.
+                    </p>
+                    <p class="text-secondary">
+                        Trained on structured clinical patterns across 4,920 diagnostic instances, the system classifies 132 individual binary symptoms into 41 distinct medical conditions using Support Vector Machines (SVC).
+                    </p>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="/static/xyz.png" alt="About Health Platform" class="img-fluid neu-card p-2" style="max-height: 320px; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+        <h3 class="fw-bold text-center mb-4">System Architecture & Core Principles</h3>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="category-card">
+                    <div class="neu-circle-recessed text-primary mb-3"><i class="fas fa-server"></i></div>
+                    <h5 class="fw-bold mb-2">High-Performance FastAPI</h5>
+                    <p class="text-secondary small mb-0">
+                        Migrated from legacy Flask to asynchronous FastAPI running on Uvicorn ASGI with strict Pydantic validation and automatic OpenAPI Swagger documentation.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card">
+                    <div class="neu-circle-recessed text-success mb-3"><i class="fas fa-brain"></i></div>
+                    <h5 class="fw-bold mb-2">Preserved SVC Model</h5>
+                    <p class="text-secondary small mb-0">
+                        The original Scikit-learn Support Vector Classifier is preserved with its exact 132-dimension feature ordering, ensuring 100% predictive integrity.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card">
+                    <div class="neu-circle-recessed text-warning mb-3"><i class="fas fa-shield-halved"></i></div>
+                    <h5 class="fw-bold mb-2">Intelligent AI Fallback</h5>
+                    <p class="text-secondary small mb-0">
+                        When users enter colloquial terms or unsupported symptoms, the system activates Google Gemini AI fallback to suggest clarifications without fabricating model predictions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

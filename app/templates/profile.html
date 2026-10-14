@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile | Personalized Medical Recommendation System{% endblock %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container py-4">
+        <div class="row g-4">
+            <!-- Profile Sidebar Card -->
+            <div class="col-lg-4">
+                <div class="neu-card text-center p-4">
+                    <div class="neu-circle-raised mx-auto mb-3 text-danger" style="width: 80px; height: 80px; font-size: 2.2rem;">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h4 class="fw-bold mb-1">{{ first_name }} {{ last_name }}</h4>
+                    <p class="text-muted small mb-3">{{ email }}</p>
+                    <span class="neu-btn text-success py-1 px-3 mb-4" style="font-size: 0.8rem;">
+                        <i class="fas fa-circle-check me-1"></i> Active Member
+                    </span>
+
+                    <hr class="my-3 opacity-25">
+
+                    <div class="d-flex justify-content-between text-secondary small py-2">
+                        <span><i class="fas fa-calendar-check me-2 text-primary"></i>Member Since</span>
+                        <strong>{{ join_date }}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between text-secondary small py-2">
+                        <span><i class="fas fa-shield-halved me-2 text-primary"></i>Account Status</span>
+                        <strong class="text-success">Verified</strong>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a href="/#checker-section" class="neu-btn neu-btn-action py-2">
+                            <i class="fas fa-stethoscope me-1"></i> Check Symptoms
+                        </a>
+                        <a href="/logout" class="neu-btn text-danger py-2">
+                            <i class="fas fa-sign-out-alt me-1"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Details and History -->
+            <div class="col-lg-8">
+                <div class="neu-card p-4 p-md-5 mb-4">
+                    <h5 class="fw-bold mb-4 d-flex align-items-center gap-2">
+                        <i class="fas fa-clock-rotate-left text-primary"></i> Recent Symptom Searches
+                    </h5>
+
+                    {% if recent_searches %}
+                    <div class="list-group list-group-flush">
+                        {% for search in recent_searches %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 px-0 border-bottom border-light-subtle">
+                            <div>
+                                <i class="fas fa-notes-medical text-primary me-2"></i>
+                                <span class="fw-medium">{{ search }}</span>
+                            </div>
+                            <form action="/predict" method="post" class="d-inline">
+                                <input type="hidden" name="symptoms" value="{{ search }}">
+                                <button type="submit" class="neu-btn btn-sm px-3">
+                                    Re-Check <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </form>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5 text-muted">
+                        <div class="neu-circle-recessed mx-auto mb-3" style="width: 60px; height: 60px;">
+                            <i class="fas fa-magnifying-glass fs-4"></i>
+                        </div>
+                        <h6>No recent searches yet</h6>
+                        <p class="small mb-3">Your symptom check history will be saved here.</p>
+                        <a href="/#checker-section" class="neu-btn neu-btn-primary btn-sm px-4">
+                            Start First Check
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Clinical Notice Card -->
+                <div class="neu-card p-4">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="neu-circle-recessed text-warning" style="width: 44px; height: 44px; font-size: 1.1rem;">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Privacy & Clinical Safety</h6>
+                            <p class="small text-secondary mb-0">
+                                Symptom searches and personalized insights are processed strictly for educational decision-support. No private clinical records are shared with third parties.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

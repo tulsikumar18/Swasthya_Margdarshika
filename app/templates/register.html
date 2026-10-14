@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Register | Personalized Medical Recommendation System{% endblock %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="neu-card p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="neu-circle-raised mx-auto mb-3 text-primary">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1">Create an Account</h3>
+                        <p class="text-secondary small mb-0">Join Swasthya Margadarshika for personalized health insights</p>
+                    </div>
+
+                    {% if error %}
+                    <div class="neu-card p-3 mb-4 text-danger d-flex align-items-center gap-2" role="alert">
+                        <i class="fas fa-circle-exclamation"></i>
+                        <div class="small">{{ error }}</div>
+                    </div>
+                    {% endif %}
+
+                    <form action="/register" method="post">
+                        <input type="hidden" name="next_url" value="{{ next_url or '/' }}">
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label fw-semibold small text-secondary text-uppercase ps-2">First Name</label>
+                                <input type="text" class="neu-input" id="firstName" name="firstName" required placeholder="John">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label fw-semibold small text-secondary text-uppercase ps-2">Last Name</label>
+                                <input type="text" class="neu-input" id="lastName" name="lastName" required placeholder="Doe">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold small text-secondary text-uppercase ps-2">Email Address</label>
+                            <input type="email" class="neu-input" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <label for="password" class="form-label fw-semibold small text-secondary text-uppercase ps-2">Password</label>
+                                <input type="password" class="neu-input" id="password" name="password" required minlength="6" placeholder="Min 6 characters">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="confirmPassword" class="form-label fw-semibold small text-secondary text-uppercase ps-2">Confirm Password</label>
+                                <input type="password" class="neu-input" id="confirmPassword" name="confirmPassword" required minlength="6" placeholder="Re-enter password">
+                            </div>
+                        </div>
+
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="neu-btn neu-btn-action py-3 fs-6">
+                                <i class="fas fa-user-check me-2"></i> Register Account
+                            </button>
+                        </div>
+
+                        <div class="text-center small text-secondary">
+                            Already have an account? <a href="/login" class="text-danger fw-semibold text-decoration-none">Sign In</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

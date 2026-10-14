@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Swasthya Margadarshika {% endblock %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="neu-card p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="neu-circle-raised mx-auto mb-3 text-danger">
+                            <i class="fas fa-right-to-bracket"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1">Welcome Back</h3>
+                        <p class="text-secondary small mb-0">Sign in to access Swasthya Margadarshika</p>
+                    </div>
+
+                    {% if error %}
+                    <div class="neu-card p-3 mb-4 text-danger d-flex align-items-center gap-2" role="alert">
+                        <i class="fas fa-circle-exclamation"></i>
+                        <div class="small">{{ error }}</div>
+                    </div>
+                    {% endif %}
+
+                    <form action="/login" method="post">
+                        <input type="hidden" name="next_url" value="{{ next_url or '/' }}">
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold small text-secondary text-uppercase ps-2">Email Address</label>
+                            <input type="email" class="neu-input" id="email" name="email" required placeholder="demo@example.com">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label fw-semibold small text-secondary text-uppercase ps-2">Password</label>
+                            <input type="password" class="neu-input" id="password" name="password" required placeholder="••••••••">
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="neu-btn neu-btn-action py-3 fs-6">
+                                <i class="fas fa-sign-in-alt me-2"></i> Sign In
+                            </button>
+                        </div>
+
+                        <!-- Demo User Quick Fill Button -->
+                        <div class="d-grid mb-4">
+                            <button type="button" class="neu-btn btn-sm py-2" id="fillDemoBtn">
+                                <i class="fas fa-key me-1 text-primary"></i> Quick Fill Demo (demo@example.com)
+                            </button>
+                        </div>
+
+                        <div class="text-center small text-secondary">
+                            Don't have an account? <a href="/register" class="text-danger fw-semibold text-decoration-none">Create Account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('fillDemoBtn')?.addEventListener('click', function() {
+    document.getElementById('email').value = 'demo@example.com';
+    document.getElementById('password').value = 'password123';
+});
+</script>
+{% endblock %}

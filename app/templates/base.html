@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Personalized Medical Recommendation System{% endblock %}</title>
+    <meta name="description" content="AI and Machine Learning powered personalized medical recommendation system with symptom checking, disease prediction, and wellness insights.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Neumorphic Theme CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Neumorphic Navigation Header -->
+    <nav class="navbar navbar-expand-lg neu-navbar py-3 sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-3" href="{% if is_authenticated %}/{% else %}/login{% endif %}">
+                <div class="brand-icon-box">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <div>
+                    <span class="brand-title fw-bold d-block">Swasthya Margadarshika</span>
+                    <span class="brand-subtitle d-none d-sm-block">Medical Recommendation System</span>
+                </div>
+            </a>
+            
+            {% if is_authenticated %}
+            <button class="navbar-toggler neu-btn-circle border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars-staggered"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 align-items-lg-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link neu-nav-pill active" href="/"><i class="fas fa-house-chimney-medical"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link neu-nav-pill" href="/#checker-section"><i class="fas fa-stethoscope"></i> Symptom Checker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link neu-nav-pill" href="/about"><i class="fas fa-circle-info"></i> About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link neu-nav-pill" href="/#checker-section"><i class="fas fa-clock-rotate-left"></i> History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link neu-nav-pill" href="/profile"><i class="fas fa-id-badge"></i> Profile</a>
+                    </li>
+                </ul>
+
+                <!-- User Actions (API Docs + Logout) -->
+                <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0">
+                    <a href="/docs" target="_blank" class="neu-btn px-3 py-2" style="font-size: 0.88rem;" title="FastAPI Interactive Documentation">
+                        <i class="fas fa-code text-primary"></i> API Docs
+                    </a>
+
+                    <a href="/logout" class="neu-btn text-danger px-3 py-2" style="font-size: 0.88rem;" title="Sign Out">
+                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <!-- Unauthenticated: Only Login/Register buttons -->
+            <div class="d-flex align-items-center gap-2">
+                <a href="/login" class="neu-btn px-4 py-2" style="font-size: 0.9rem;">Login</a>
+                <a href="/register" class="neu-btn neu-btn-action px-4 py-2" style="font-size: 0.9rem;">Register</a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Neumorphic Professional Footer: Only visible when authenticated -->
+    {% if is_authenticated %}
+    <footer class="neu-footer">
+        <div class="container">
+            <!-- Compact Emergency Notice Pill -->
+            <div class="text-center mb-4">
+                <div class="neu-safety-pill">
+                    <i class="fas fa-shield-heart text-danger"></i>
+                    <strong>Emergency Notice:</strong> If experiencing acute or life-threatening symptoms, call <span class="fw-bold text-danger">911 / 112</span> immediately.
+                </div>
+            </div>
+
+            <!-- Neumorphic Professional Footer Card (Clean 2-Column Layout) -->
+            <div class="neu-card p-4 p-md-5 mb-4">
+                <div class="row g-4 align-items-center">
+                    <!-- Column 1: Brand, Tagline & Official Email Contact -->
+                    <div class="col-lg-7 col-md-12 text-center text-lg-start">
+                        <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3 mb-3">
+                            <div class="brand-icon-box sm">
+                                <i class="fas fa-heart-pulse"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-primary">Swasthya Margadarshika</h6>
+                                <small class="text-muted">AI Clinical Decision Support Platform</small>
+                            </div>
+                        </div>
+                        <p class="text-secondary small mb-3 max-w-500 mx-auto mx-lg-0">
+                            Automated symptom checking combining machine learning (SVC) and Google Gemini AI fallback for comprehensive healthcare guidance.
+                        </p>
+                        <!-- Official Support Email & Contact Action -->
+                        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start align-items-center gap-2">
+                            <a href="mailto:swasthyamargadarshika@gmail.com" class="neu-btn btn-sm text-decoration-none footer-email-btn" title="Official Support Email">
+                                <i class="fas fa-envelope text-danger me-1"></i>
+                                <span>swasthyamargadarshika@gmail.com</span>
+                            </a>
+                            <a href="/contact" class="neu-btn btn-sm text-decoration-none footer-contact-btn">
+                                <i class="fas fa-paper-plane text-primary me-1"></i> Contact Us
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Developer Connect with Social Media Links -->
+                    <div class="col-lg-5 col-md-12 text-center text-lg-end">
+                        <hr class="neu-divider d-lg-none my-4">
+                        <div class="d-inline-block text-center text-lg-end">
+                            <h6 class="fw-bold text-primary mb-1">Developer Connect</h6>
+                            <p class="text-muted small mb-3">
+                                Developed by <strong>tulsikumr18</strong>
+                            </p>
+                            <div class="d-flex justify-content-center justify-content-lg-end align-items-center gap-3">
+                                <!-- LinkedIn -->
+                                <a href="https://www.linkedin.com/in/tulsi-kumar-yadav-2b749627a" target="_blank" rel="noopener noreferrer" class="neu-btn-circle" title="LinkedIn Profile">
+                                    <i class="fab fa-linkedin-in text-primary fs-5"></i>
+                                </a>
+                                <!-- GitHub -->
+                                <a href="https://github.com/tulsikumar18/" target="_blank" rel="noopener noreferrer" class="neu-btn-circle" title="GitHub Profile">
+                                    <i class="fab fa-github text-dark fs-5"></i>
+                                </a>
+                                <!-- LeetCode -->
+                                <a href="https://leetcode.com/u/TULSIKUMARYADAV/" target="_blank" rel="noopener noreferrer" class="neu-btn-circle" title="LeetCode Profile">
+                                    <i class="fas fa-code text-warning fs-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Required Developer Attribution - Sleek Responsive Neumorphic Pill -->
+            <div class="text-center pt-2 pb-3">
+                <div class="neu-copyright-pill mx-auto">
+                    <span class="copyright-text">
+                        &copy; 2026 Swasthya Margadarshika. All rights reserved. &bull; Developed by <strong>tulsikumr18</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% else %}
+    <!-- Minimal footer for unauthenticated pages -->
+    <footer class="neu-footer py-3 text-center">
+        <div class="container">
+            <div class="neu-copyright-pill mx-auto">
+                <span class="copyright-text">
+                    &copy; 2026 Swasthya Margadarshika. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    {% endif %}
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Application Interactive Logic -->
+    <script src="/static/js/app.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

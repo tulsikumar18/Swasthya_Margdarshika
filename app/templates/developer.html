@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Developer | Personalized Medical Recommendation System{% endblock %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container py-4">
+        <div class="neu-card p-4 p-md-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-4 text-center">
+                    <div class="neu-circle-raised mx-auto mb-3" style="width: 150px; height: 150px;">
+                        <i class="fas fa-user-doctor text-danger" style="font-size: 4rem;"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1">Tulsi Kumar Yadav</h3>
+                    <p class="text-primary fw-semibold small mb-2">AI & Machine Learning Engineer</p>
+                    <div class="d-flex justify-content-center gap-2 mb-3">
+                        <span class="neu-btn py-1 px-3 font-monospace" style="font-size: 0.85rem;">tulsikumr18</span>
+                    </div>
+                    <p class="text-muted small px-3 mb-3">
+                        Lead Developer for Swasthya Margadarshika &bull; Health Tech Innovator
+                    </p>
+                    <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+                        <a href="https://www.linkedin.com/in/tulsi-kumar-yadav-2b749627a" target="_blank" rel="noopener noreferrer" class="neu-btn-circle" title="LinkedIn Profile">
+                            <i class="fab fa-linkedin-in text-primary"></i>
+                        </a>
+                        <a href="https://github.com/tulsikumar18/" target="_blank" rel="noopener noreferrer" class="neu-btn-circle" title="GitHub Profile">
+                            <i class="fab fa-github text-dark"></i>
+                        </a>
+                        <a href="https://leetcode.com/u/TULSIKUMARYADAV/" target="_blank" rel="noopener noreferrer" class="neu-btn-circle" title="LeetCode Profile">
+                            <i class="fas fa-code text-warning"></i>
+                        </a>
+                        <a href="/contact" class="neu-btn-circle" title="Contact">
+                            <i class="fas fa-envelope text-danger"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <span class="neu-btn text-primary py-1 px-3 mb-3" style="font-size: 0.85rem;">Engineering Lead</span>
+                    <h2 class="fw-bold mb-3">Meet the Developer</h2>
+                    <p class="lead text-secondary" style="font-size: 1.1rem;">
+                        Passionate AI & Machine Learning Engineer dedicated to developing high-impact intelligent systems in healthcare, automated diagnostics, and predictive analytics.
+                    </p>
+                    <p class="text-secondary">
+                        Swasthya Margadarshika represents the intersection of machine learning technology and accessible medical guidance. Built with rigorous attention to feature representation, model compatibility, and safe clinical boundaries, this system aims to make preventative health guidance universally available.
+                    </p>
+                    <div class="row g-3 mt-3">
+                        <div class="col-sm-6">
+                            <div class="neu-card p-3">
+                                <h6 class="fw-bold mb-1 text-primary"><i class="fas fa-code-branch me-2"></i> Backend & Architecture</h6>
+                                <small class="text-secondary">FastAPI, Python, Asynchronous ASGI, RESTful APIs, Pydantic</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="neu-card p-3">
+                                <h6 class="fw-bold mb-1 text-danger"><i class="fas fa-brain me-2"></i> Machine Learning</h6>
+                                <small class="text-secondary">Scikit-learn, Support Vector Classifiers (SVC), NumPy, Pandas</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
