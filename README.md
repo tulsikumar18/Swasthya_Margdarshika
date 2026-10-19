@@ -545,38 +545,6 @@ pytest -v --tb=short
 
 ---
 
-## ☁️ Deployment
-
-### Deploy on Render (Recommended)
-
-The project includes a pre-configured [`render.yaml`](render.yaml) blueprint for 1-click deployment:
-
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Production-ready: Swasthya Margadarshika"
-   git push -u origin main
-   ```
-
-2. **Create Web Service on Render**
-   - Go to [render.com](https://render.com) → **New** → **Web Service**
-   - Connect your GitHub repository
-   - Render auto-detects the blueprint configuration
-
-3. **Set Environment Variables**
-   
-   | Variable | Required | Description |
-   |---|:---:|---|
-   | `GEMINI_API_KEY` | ⚠️ Optional | Google Gemini API key for AI fallback |
-   | `SECRET_KEY` | ✅ Yes | Cryptographic secret for sessions |
-
-4. **Deploy** 🚀
-
-> [!IMPORTANT]
-> The `Procfile` is configured with Gunicorn: `web: gunicorn app.main:app -k uvicorn.workers.UvicornWorker`
-
-<br/>
-
 ---
 
 ## 📊 Datasets
